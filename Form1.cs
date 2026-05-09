@@ -8,11 +8,15 @@ namespace lab3_4
         {
             InitializeComponent();
 
-            picture.AddFigure(new Circle(50, 100, 100));
+            picture.AddFigure(new Circle(150, 100, 100));
             picture.AddFigure(new Circle(30, 200, 150));
+
+            //picture.MoveFigureBy(1, 100, 100);
+
+            Invalidate(); // Викликаємо перерисовку форми після зміни позиції фігури
         }
 
-        private void Form1_Paint(object sender, PaintEventArgs e)
+        private void Panel_Paint(object sender, PaintEventArgs e)
         {
             picture.Draw(e.Graphics);
         }

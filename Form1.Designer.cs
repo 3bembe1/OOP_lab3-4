@@ -1,6 +1,6 @@
 ﻿namespace lab3_4
 {
-    partial class Form1
+    public partial class Form1
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,19 +28,44 @@
         /// </summary>
         private void InitializeComponent()
         {
+            panel1 = new Panel();
+            panel2 = new Panel();
             SuspendLayout();
+            // 
+            // panel1
+            // 
+            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Location = new Point(12, 12);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(776, 268);
+            panel1.TabIndex = 0;
+            panel1.Paint += Panel_Paint;
+            // 
+            // panel2
+            // 
+            panel2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panel2.BorderStyle = BorderStyle.FixedSingle;
+            panel2.Location = new Point(12, 286);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(776, 152);
+            panel2.TabIndex = 1;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(panel2);
+            Controls.Add(panel1);
             Name = "Form1";
             Text = "Form1";
-            Paint += Form1_Paint;
             ResumeLayout(false);
         }
 
         #endregion
+
+        private Panel panel1;
+        private Panel panel2;
     }
 }

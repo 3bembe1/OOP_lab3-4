@@ -23,6 +23,8 @@ namespace lab3_4
             Radius = radius;
             X = x;
             Y = y;
+
+            RectangleF rect = GetBoundingBox();
         }
 
         // Метод 1: Переміщення в потрібну позицію (абсолютні координати)
@@ -49,6 +51,8 @@ namespace lab3_4
         public abstract void Draw(Graphics g);
 
         public abstract string PrintInfo();
+
+        public abstract RectangleF GetBoundingBox();
     }
 
     // 2. Проміжні класи для 2D та 3D
@@ -76,13 +80,7 @@ namespace lab3_4
     // 3. Плоскі фігури (Спадкують Figure2D)
     internal class Circle : Figure2D
     {
-        public Circle(double radius, double x = 0, double y = 0) : base("Коло", radius, x, y)
-        {
-            if (radius > x || radius > y)
-            {
-                throw new ArgumentException("Радіус не може перевищувати координати фігури.");
-            }
-        }
+        public Circle(double radius, double x = 0, double y = 0) : base("Коло", radius, x, y) { }
 
         public override void Draw(Graphics g)   
         {
@@ -107,6 +105,12 @@ namespace lab3_4
         public override string PrintInfo()
         {
             return $"Клас: {this.GetType().Name} | Назва: {Name} | Позиція: ({X}, {Y}) | Радіус: {Radius} | Периметр: {GetPerimeter():F2} | Площа: {GetArea():F2}";
+        }
+
+        public override RectangleF GetBoundingBox()
+        {
+            // Для кола, обмежувальний прямокутник - це квадрат, що вписує коло
+            return new RectangleF((float)(X - Radius), (float)(Y - Radius), (float)(Radius * 2), (float)(Radius * 2));
         }
     }
 }

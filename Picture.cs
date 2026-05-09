@@ -7,32 +7,47 @@ namespace lab3_4
     internal class Picture
     {
         // Координати верхнього лівого кута
-        private double X;
-        private double Y;
+        private double X = double.MaxValue;
+        private double Y = double.MaxValue;
 
         private double Width = 0;
         private double Height = 0;
 
         private List<Figure> Figures = new List<Figure>();
 
+        public void MoveFigureTo(int index, double dx, double dy)
+        {
+            if (index >= 0 && index < Figures.Count)
+            {
+                Figures[index].MoveTo(dx, dy);
+            }
+        }
+
+        public void MoveFigureBy(int index, double dx, double dy)
+        {
+            if (index >= 0 && index < Figures.Count)
+            {
+                Figures[index].MoveBy(dx, dy);
+            }
+        }
+
         public void AddFigure(Figure figure)
         {
             Figures.Add(figure);
 
-            // TODO: Оновлюємо координати картини, враховуючи позицію та розмір доданої фігури
+            RectangleF rect = figure.GetBoundingBox();
 
-            // Оновлюємо розміри зображення, враховуючи позицію та розмір фігури
-            double figureRight = figure.X + figure.Radius; // Припускаємо, що фігура - це коло з радіусом
-            double figureBottom = figure.Y + figure.Radius;
-            
-            if (figureRight > Width)
-            {
-                Width = figureRight; // Оновлюємо ширину картини
-            }
-            if (figureBottom > Height)
-            {
-                Height = figureBottom; // Оновлюємо висоту картини
-            }
+            if (rect.Left < X)
+                X = rect.Left;
+
+            if (rect.Top < Y)
+                Y = rect.Top;
+
+            if (rect.Right -X > Width)
+                Width = rect.Right - X;
+
+            if (rect.Bottom - Y > Height)
+                Height = rect.Bottom - Y;
         }
         public void Draw(Graphics g)
         {
