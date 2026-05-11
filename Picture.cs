@@ -15,6 +15,8 @@ namespace lab3_4
 
         private List<Figure> Figures = new List<Figure>();
 
+        public int FiguresCount => Figures.Count;
+
         public void MoveFigureTo(int index, double dx, double dy)
         {
             if (index >= 0 && index < Figures.Count)
@@ -55,6 +57,12 @@ namespace lab3_4
             {
                 figure.Draw(g);
             }
+        }
+        public string GetFigureInfo(int index)
+        {
+            if (index >= 0 && index < Figures.Count)
+                return Figures[index].PrintInfo(index);
+            return "Нет такой фигуры";
         }
     }
 }
