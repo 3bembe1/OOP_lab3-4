@@ -30,6 +30,10 @@
         {
             panel1 = new Panel();
             panel2 = new Panel();
+            button6 = new Button();
+            textBox2 = new TextBox();
+            label3 = new Label();
+            button5 = new Button();
             button4 = new Button();
             button3 = new Button();
             button2 = new Button();
@@ -56,6 +60,10 @@
             // 
             panel2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel2.BorderStyle = BorderStyle.FixedSingle;
+            panel2.Controls.Add(button6);
+            panel2.Controls.Add(textBox2);
+            panel2.Controls.Add(label3);
+            panel2.Controls.Add(button5);
             panel2.Controls.Add(button4);
             panel2.Controls.Add(button3);
             panel2.Controls.Add(button2);
@@ -67,6 +75,47 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(794, 152);
             panel2.TabIndex = 1;
+            // 
+            // button6
+            // 
+            button6.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            button6.Location = new Point(447, 124);
+            button6.Name = "button6";
+            button6.Size = new Size(75, 23);
+            button6.TabIndex = 12;
+            button6.Text = "Scaling All";
+            button6.UseVisualStyleBackColor = true;
+            button6.Click += button6_Click;
+            // 
+            // textBox2
+            // 
+            textBox2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            textBox2.Location = new Point(493, 103);
+            textBox2.Name = "textBox2";
+            textBox2.Size = new Size(31, 23);
+            textBox2.TabIndex = 11;
+            textBox2.TextChanged += textBox2_TextChanged;
+            // 
+            // label3
+            // 
+            label3.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            label3.AutoSize = true;
+            label3.Location = new Point(326, 106);
+            label3.Name = "label3";
+            label3.Size = new Size(161, 15);
+            label3.TabIndex = 10;
+            label3.Text = "Коефіцієнт масштабування:";
+            // 
+            // button5
+            // 
+            button5.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            button5.Location = new Point(366, 124);
+            button5.Name = "button5";
+            button5.Size = new Size(75, 23);
+            button5.TabIndex = 9;
+            button5.Text = "Scaling";
+            button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
             // 
             // button4
             // 
@@ -107,9 +156,9 @@
             label2.AutoSize = true;
             label2.Location = new Point(3, 106);
             label2.Name = "label2";
-            label2.Size = new Size(216, 15);
+            label2.Size = new Size(220, 15);
             label2.TabIndex = 5;
-            label2.Text = "Введіть індекс ел., який переміщюєте:";
+            label2.Text = "Введіть індекс фіг., який переміщюєте:";
             // 
             // textBox1
             // 
@@ -181,5 +230,9 @@
         private Button button3;
         private Button button4;
         private TableLayoutPanel tableLayoutPanel1;
+        private TextBox textBox2;
+        private Label label3;
+        private Button button5;
+        private Button button6;
     }
 }

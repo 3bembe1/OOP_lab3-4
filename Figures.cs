@@ -10,8 +10,8 @@ namespace lab3_4
     {
 
         // Додаємо координати на площині
-        public double X { get; private set; }
-        public double Y { get; private set; }
+        public double X { get; set; }
+        public double Y { get; set; }
 
         // Усі фігури мають радіус
         public double Radius { get; protected set; }
@@ -75,7 +75,7 @@ namespace lab3_4
 
     internal abstract class Figure3D : Figure
     {
-        public Figure3D(double x = 0, double y = 0) : base(x, y) { }
+        public Figure3D(double radius, double x = 0, double y = 0) : base(radius, x, y) { }
 
         public abstract double GetVolume();
     }
@@ -255,22 +255,17 @@ namespace lab3_4
 
     internal class Sphere : Figure3D
     {
-        public Sphere(double radius, double x = 0, double y = 0) : base(x, y)
-        {
-            // Устанавливаем унаследованное свойство Radius (set — protected в Figure)
-            Radius = radius;
-        }
-
+        public Sphere(double radius, double x = 0, double y = 0) : base(radius, x, y) { }
+        
         public override void Draw(Graphics g)
         {
             using (Pen pen = new Pen(Color.Red, 2))
             {
-                float r = (float)Radius;
                 // Малюємо зовнішній контур кулі (коло)
-                g.DrawEllipse(pen, (float)X - r, (float)Y - r, r * 2, r * 2);
+                g.DrawEllipse(pen, (float)(X - Radius), (float)(Y - Radius), (float)Radius * 2, (float)Radius * 2);
 
                 // Малюємо "екватор" для ілюзії об'єму (сплюснутий по висоті еліпс)
-                g.DrawEllipse(pen, (float)X - r, (float)Y - (r / 3), r * 2, (r * 2) / 3);
+                g.DrawEllipse(pen, (float)(X - Radius), (float)(Y - (Radius / 3)), (float)Radius * 2, (float)(Radius * 2) / 3);
             }
         }
 
@@ -305,9 +300,9 @@ namespace lab3_4
 
     internal class SphericalSegment : Figure3D
     {
-        public double Height { get; private set; } = 0;
+        public double Height { get; set; } = 0;
 
-        public SphericalSegment(double Radius, double Height, double x = 0, double y = 0) : base(x, y) 
+        public SphericalSegment(double Radius, double Height, double x = 0, double y = 0) : base(Radius, x, y) 
         {
             this.Height = Height;
         }
@@ -348,14 +343,16 @@ namespace lab3_4
 
         public override void Scale(double factor)
         {
+            if (factor <= 0)
+                throw new ArgumentException("Коефіцієнт масштабування має бути більшим за 0.");
+
             Radius *= factor;
             Height *= factor;
         }
 
         public override double GetArea()
         {
-            double rBaseSq = Radius * Radius - Math.Pow(Radius - Height, 2);
-            return 2 * Math.PI * Radius * Height + Math.PI * rBaseSq;
+            return 2 * Math.PI * Radius * Height + Math.PI * Math.Pow(Radius, 2);
         }
 
         public override double GetVolume()

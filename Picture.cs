@@ -33,6 +33,25 @@ namespace lab3_4
             }
         }
 
+        public void ScaleFigure(int index, double factor)
+        {
+            if (index >= 0 && index < Figures.Count)
+            {
+                Figures[index].Scale(factor);
+            }
+        }
+
+        public void ScaleAllFigures(double factor)
+        {
+            foreach (var figure in Figures)
+            {
+                figure.Scale(factor);
+
+                figure.X *= factor;
+                figure.Y *= factor;
+            }
+        }
+
         public void AddFigure(Figure figure)
         {
             Figures.Add(figure);
@@ -53,6 +72,8 @@ namespace lab3_4
         }
         public void Draw(Graphics g)
         {
+            g.TranslateTransform(800, 100);
+
             foreach (var figure in Figures)
             {
                 figure.Draw(g);
